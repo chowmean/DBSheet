@@ -1,8 +1,6 @@
 class Table:
     def __init__(self, columns, name):
         self.columns = columns
-        if 'id' not in columns:
-            self.columns.add('id')
         self.name = name
 
 
@@ -58,3 +56,20 @@ class WorkingTable:
                 if matched_count == count:
                     break;
         return matched_rows
+
+    def get_index(self,key, value):
+        all_data = self.get_all()
+        matched_rows = []
+        index = 1
+        for each_d in all_data:
+            if each_d[key] == value:
+                return index + 1
+            index = index + 1
+        return -1
+
+    def delete(self,key, value):
+        index = self.get_index(key, value)
+        print index
+        while index != -1:
+            self.wk_sheet.delete_row(index)
+            index = self.get_index(key, value)
