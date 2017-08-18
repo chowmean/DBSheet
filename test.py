@@ -1,17 +1,7 @@
-import gspread
-from oauth2client.service_account import ServiceAccountCredentials
-from GoogleSheetClass import Table, CreateTable, WorkingTable
-
-
-table = Table( {"data1", "data2",}, "Testtable2")
-
-#use creds to create a client to interact with the Google Drive API
-scope = ['https://spreadsheets.google.com/feeds']
-creds = ServiceAccountCredentials.from_json_keyfile_name('client_secret.json', scope)
-client = gspread.authorize(creds)
-
-
-sheet = client.open("SHEETBACKEND")
+from DbSheet import DbSheet
+from SheetTable import WorkingTable
+db = DbSheet("SHEETBACKEND")
+sheet = db.get_db_conn()
 
 # Extract and print all of the values
 #list_of_hashes = sheet.get_all_records()
@@ -29,7 +19,7 @@ working_table = WorkingTable("Testtable2",sheet)
 
 data = working_table.get_all()
 print (data)
-print working_table.get_attr("data1",2)
+print working_table.get_attr("id",2)
 print ("\n")
 print working_table.get_one("data1",2)
 print ("\n")
