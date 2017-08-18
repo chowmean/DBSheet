@@ -1,6 +1,8 @@
 class Table:
     def __init__(self, columns, name):
         self.columns = columns
+        if 'id' not in columns:
+            self.columns.add('id')
         self.name = name
 
 
@@ -21,7 +23,38 @@ class CreateTable:
         worksheet.delete_row(1)
         return True
 
-    def get_rows(self):
-        pass
 
+class WorkingTable:
+    def __init__(self, name, sheet_obj):
+        for i in range(0,100):
+            self.wk_sheet = sheet_obj.get_worksheet(i)
+            if self.wk_sheet.title == name:
+                break
+            elif self.wk_sheet.title == "":
+                return "No sheet with this name found"
 
+    def get_all(self):
+        return self.wk_sheet.get_all_records()
+
+    def insert(self, row):
+        if len(row) != self.wk_sheet.col_count:
+            return "Column count doest match"
+        return self.wk_sheet.append_row(row)
+
+    def get_one(self,key, value):
+        return self.find(key, value, 1)
+
+    def get_attr(self, key, value):
+        return self.find(key,value)
+
+    def find(self,key, value, count=-1):
+        all_data = self.get_all()
+        matched_rows = []
+        matched_count = 0
+        for each_d in all_data:
+            if each_d[key] == value:
+                matched_rows.append(each_d)
+                matched_count = matched_count +1
+                if matched_count == count:
+                    break;
+        return matched_rows
