@@ -7,4 +7,4 @@ from fabpolish.contrib import find_merge_conflict_leftovers
 def composer_security_check_npm():
     """Requires nsp in package"""
     info('Running security check for python dependencies...')
-    return local("safety check -r requirements.txt")
+    return local("safety check -r requirements.pip")
