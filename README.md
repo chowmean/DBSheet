@@ -5,8 +5,53 @@ Using google spreadsheets as database.
 
 1. Creating Tables
 2. Inserting Rows
-3. Editing Rows
-4. Search for Rows
+3. Get all records
+3. Search for Rows
+
+### Creating tables
+
+```python
+from db_sheet.db_sheet import DbSheet
+from db_sheet.sheet_table import WorkingTable, CreateTable, Table
+db = DbSheet(db_name = "SHEETBACKEND", api_creds = "client_secret.json", scope = ['https://spreadsheets.google.com/feeds'])
+sheet = db.get_db_conn()
+table = Table({"Col1","col2"},"name_of_table")
+creator = CreateTable(table, sheet)
+creator.create_table()
+```
+
+### Inserting Rows
+
+```python
+from db_sheet.sheet_table import WorkingTable, CreateTable, Table
+working_table = WorkingTable("tablename",sheet)
+working_table.insert({"value1","value2"}
+```
+
+
+### Get all records
+
+```python
+from db_sheet.sheet_table import WorkingTable, CreateTable, Table
+working_table = WorkingTable("tablename",sheet)
+working_table.get_all()
+```
+
+### Search for One Row
+
+```python
+from db_sheet.sheet_table import WorkingTable, CreateTable, Table
+working_table = WorkingTable("tablename",sheet)
+working_table.get_one("column_name",value)
+```
+
+### Search for particular number of Rows 
+
+```python
+from db_sheet.sheet_table import WorkingTable, CreateTable, Table
+working_table = WorkingTable("tablename",sheet)
+working_table.find("column_name",value,total_count_u_need)
+```
 
 
 ## Contribution:
