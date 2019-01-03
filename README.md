@@ -6,7 +6,19 @@ Using google spreadsheets as database.
 1. Creating Tables
 2. Inserting Rows
 3. Get all records
-3. Search for Rows
+4. Search for One Row
+5. Search for particular number of Rows 
+
+## How to initialize
+```python
+from db_sheet.db_sheet import DbSheet
+from db_sheet.sheet_table import WorkingTable, CreateTable, Table
+db = DbSheet(db_name = "SHEETBACKEND", api_creds = "client_secret.json", scope = ['https://spreadsheets.google.com/feeds'])
+sheet = db.get_db_conn()
+```
+
+Sheet is like database.
+
 
 ### Creating tables
 
