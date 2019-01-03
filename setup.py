@@ -25,7 +25,7 @@ CLASSIFIERS = [
 
 # Read version properties file and extract version number.
 def get_version():
-    version = "0.1"
+    version = "0.1.4"
     try:
         with open(VER_PROP_FILE) as f:
             for line in f.readlines():
@@ -51,6 +51,10 @@ def get_install_requirements():
 
 
 if __name__ == '__main__':
+
+    with open('README.md', 'r') as f:
+        readme = f.read()
+
     setuptools.setup(
         name="db_sheet",
         version=get_version(),
@@ -62,7 +66,7 @@ if __name__ == '__main__':
         install_requires=get_install_requirements(),
         packages=["db_sheet", ],
         classifiers=CLASSIFIERS,
-        long_description="""
-            db_sheet: Using Google Spreadsheets as Database.
-        """,
+        long_description=readme,
+        long_description_content_type="text/markdown",
+        license="Apache-2.0"
     )
